@@ -8,6 +8,13 @@ function resetForm(){
     for(let i=0;i<arr.length;i++){
         $("#"+arr[i].colName).val("")
     }
+    $("#first").attr("disabled",false);
+    $("#previous").attr("disabled",false);
+    $("#change").attr('disabled',false);
+    $("#save").attr('disabled',false);
+    $("#reset").attr('disabled',false);
+    $("#last").attr("disabled",false);
+    $("#next").attr("disabled",false);
 }
 
 function saveForm(){
@@ -105,8 +112,13 @@ function disableFields(){
 function enableFields(){
     for(let i=0;i<arr.length;i++)
     $('#'+arr[i].colName).attr('readonly', false);
-    $("#save").attr("disabled",false);
-    $("#reset").attr("disabled",false);
+    $("#first").attr("disabled",false);
+    $("#previous").attr("disabled",false);
+    $("#change").attr('disabled',false);
+    $("#save").attr('disabled',false);
+    $("#reset").attr('disabled',false);
+    $("#last").attr("disabled",false);
+    $("#next").attr("disabled",false);
 }       
 
 function goToFirst(){
@@ -135,7 +147,8 @@ function goToLast(){
     }
     $("#last").attr("disabled",true);    
     $("#next").attr("disabled",true);
-    $("#prev").attr("disabled",false);
+    $("#previous").attr("disabled",false);
+    $("#first").attr("disabled",false);
 }
 
 function goToNext(){
@@ -156,6 +169,9 @@ function goToNext(){
     if(resultObj01["status"]==400){
         $("#next").attr("disabled",true);
         $("#last").attr("disabled",true);
+        $("#previous").attr("disabled",false);
+        $("#first").attr("disabled",false);
+
         return;
     }
     var result=JSON.parse(resultObj01.data);
