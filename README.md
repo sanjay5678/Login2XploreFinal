@@ -1,5 +1,6 @@
 "# Login2XploreFinal" 
 All the required files are in AdminLTE-3.2.0/pages/tables
+- A demo video is present in videos section
 - First open simple.html
 - Enter token and press GO
 - You will see all the databeses and relations on the left side bar.
