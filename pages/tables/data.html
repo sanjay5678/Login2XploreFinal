@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | DataTables</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="data.html" class="nav-link">Table</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="index.html" class="nav-link">Form</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Filter</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="../../index3.html" class="brand-link">
+      <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">JSONPowerDB</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        
+        <div class="info">
+          <a href="#" class="d-block">Change Token</a>
+        </div>
+      </div>
+      <br>
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" id="token" type="text" aria-label="Search">
+        </div>
+      </div>
+      <br>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          
+          
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link bg-success">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Databases
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            
+            <ul class="nav nav-treeview">
+              <span id="dbNames"></span>
+              
+              
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>DataTables</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Relations</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead id="columns">
+                    
+                  </thead>
+                  <tbody id="rows">
+                  
+                  </tbody>
+                  <tfoot id="columns1">
+                  
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.2.0
+    </div>
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="jpdbutil.js"></script>
+
+<script>
+  var token=sessionStorage.getItem("token")
+  document.getElementById("token").value=token
+    var req=createGET_ALL_DBRequest(token);
+    console.log(req)
+    jQuery.ajaxSetup({async:false})
+    var jsonStr=executeCommandAtGivenBaseUrl(req,"http://api.login2explore.com:5577","/api/irl")
+    jQuery.ajaxSetup({async:true})
+    var arr=jsonStr.data
+    var str=""
+    var relName
+    for(let i=0;i<arr.length;i++){
+        let str1=""
+        relName=relNamesFunc(token,arr[i])
+        for(let j=0;j<relName.length;j++){
+            let htmlEle2='<li class="nav-item"><a class="nav-link" ><p onclick="AddContents(this)" id="'+arr[i]+'">'+relName[j].relName+'</p></a></li>'
+            str1+=htmlEle2
+        }
+        let htmlEle1='<li class="nav-item bg-light"><a class="nav-link"><p>'+arr[i]+'<i class="right fas fa-angle-left"></i></p></a><ul class="nav bg-dark" id="relNames">'+str1+'</ul></li>'
+        str+=htmlEle1
+    }
+    console.log(str)
+    $("#dbNames").html(str)
+    if(sessionStorage.getItem("dbName")===null && sessionStorage.getItem("relName")===null){
+      var s=arr[0]
+      relName=relNamesFunc(token,arr[0])
+      var rel=relName[0].relName
+    }
+    else{
+      var s=sessionStorage.getItem("dbName");
+      var rel=sessionStorage.getItem("relName");
+    }
+    var getColReq=createGET_ALL_COLRequest(token,s,rel)
+    console.log(getColReq)
+    jQuery.ajaxSetup({async:false})
+    var jsonStr=executeCommandAtGivenBaseUrl(getColReq,"http://api.login2explore.com:5577","/api/irl")
+    jQuery.ajaxSetup({async:true})
+    console.log(jsonStr)
+    var arr=jsonStr.data
+    var str="<tr>"
+    var noOfCol=arr.length
+    for(let i=0;i<arr.length;i++){
+        str+='<th>'+arr[i].colName+'</th>'
+    }
+    str+="</tr>"
+    $("#columns").html(str)
+    $("#columns1").html(str)
+    var getRowReq=createGET_ALL_ROWRequest(token,s,rel)
+    console.log(getRowReq)
+    jQuery.ajaxSetup({async:false})
+    var jsonStr=executeCommandAtGivenBaseUrl(getRowReq,"http://api.login2explore.com:5577","/api/irl")
+    jQuery.ajaxSetup({async:true})
+    console.log(jsonStr)
+    var jsonObj=JSON.parse(jsonStr.data)
+    var arr1=jsonObj['json_records']
+    var str2=""
+    var count=0
+    console.log(arr1.length)
+    if(arr.length==0){
+      
+    }
+    else
+    for(let i=0;i<arr1.length;i++){
+        
+        let k=arr1[i].record
+        if(k===null){
+          break
+        }
+        str2+="<tr>"
+        for (const item in k) {
+            str2+="<td>"+k[item]+"</td>"
+            count++
+          }
+          while(count<noOfCol){
+            str2+="<td>"+"NULL"+"</td>"
+            count++
+          }
+          count=0
+        str2+="</tr>"  
+    }
+    $("#rows").html(str2)
+    sessionStorage.setItem("dbName",s)
+    sessionStorage.setItem("relName",rel)
+</script>
+<!-- DataTables  & Plugins -->
+<script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="../../plugins/jszip/jszip.min.js"></script>
+<script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+  });
+</script>
+
+</body>
+</html>

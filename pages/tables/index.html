@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.4/jpdb-commons.js"></script>
+    <script src="index.js"></script>
+    <script src="jpdbutil.js"></script>
+    
+    <style>
+        .bodypart{
+            margin-left:120px;
+            margin-right:120px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bodypart">
+    <center><h1>Employee Form Using JPDB API</h1></center><br><br>
+    <div id="sanjay">
+    
+    <!-- <div class="mb-3">
+        <big><label for="exampleFormControlInput1" class="form-label">Employee ID:</label></big>
+        <input type="text" class="form-control" onchange="checkID()" id="empid" placeholder="...">
+    </div>
+    
+    <div class="mb-3">
+        <big><label for="exampleFormControlInput1" class="form-label">Employee Name:</label></big>
+        <input type="email" class="form-control" id="empname" placeholder="...">
+    </div>
+
+    <div class="mb-3">
+        <big><label for="exampleFormControlInput1" id="sal" class="form-label">Basic Salary:</label></big>
+        <input type="email" class="form-control" id="empsal" placeholder="...">
+    </div>
+
+    <div class="mb-3">
+        <big><label for="exampleFormControlInput1" id="hra" class="form-label">HRA:</label></big>
+        <input type="email" class="form-control" id="emphra" placeholder="...">
+    </div>
+
+    <div class="mb-3">
+        <big><label for="exampleFormControlInput1" id="da" class="form-label">DA:</label></big>
+        <input type="email" class="form-control" id="empda" placeholder="...">
+    </div>
+
+    <div class="mb-3">
+        <big><label for="exampleFormControlInput1" id="ded" class="form-label">Deduction:</label></big>
+        <input type="email" class="form-control" id="empded" placeholder="...">
+    </div> -->
+</div>
+    <br>
+    <big><center>
+    <button type="button" id="new" onclick="resetForm()" class="btn btn-primary">New</button>
+    <button type="button" id="save" onclick="saveForm()" class="btn btn-primary">Save</button>
+    <button type="button" id="edit" onclick="enableFields()" class="btn btn-primary">Edit</button>
+    <button type="button" id="change" onclick="updateRecord()" class="btn btn-primary">Change</button>
+    <button type="button" id="reset" onclick="resetForm()" class="btn btn-primary">Reset</button><br><br>
+    <button type="button" id="first" onclick="goToFirst()" class="btn btn-primary">First</button>
+    <button type="button" id="previous" onclick="goToPrevious()" class="btn btn-primary">Previous</button>
+    <button type="button" id="next" onclick="goToNext()" class="btn btn-primary">Next</button>
+    <button type="button" id="last" onclick="goToLast()" class="btn btn-primary">Last</button></center></big>
+</div><br><br><br>
+</body>
+<script>
+    var getColReq=createGET_ALL_COLRequest(token,dbName,relName)
+    console.log(getColReq)
+    jQuery.ajaxSetup({async:false})
+    var jsonStr=executeCommandAtGivenBaseUrl(getColReq,"http://api.login2explore.com:5577","/api/irl")
+    jQuery.ajaxSetup({async:true})
+    var arr=jsonStr.data
+    console.log(arr)
+    var str=""
+    str+="<div class=\"mb-3\"><big><label for=\"exampleFormControlInput1\" class=\"form-label\">"+arr[0].colName+":</label></big><input type=\"text\" class=\"form-control\" id=\""+arr[0].colName+"\" onchange=\"checkID()\" placeholder=\"...\"></div>"
+    for(let i=1;i<arr.length;i++){
+        str+="<div class=\"mb-3\"><big><label for=\"exampleFormControlInput1\" class=\"form-label\">"+arr[i].colName+":</label></big><input type=\"text\" class=\"form-control\" id=\""+arr[i].colName+"\" placeholder=\"...\"></div>"
+    }
+    document.getElementById("sanjay").innerHTML += str;
+    console.log(str)
+</script>
+</html>

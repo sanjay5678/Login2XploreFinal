@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enter Token</title>
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+</head>
+<body>
+<div class="wrapper">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <h2 class="text-center display-4">TOKEN</h2>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form action="../tables/data.html">
+                        <div class="input-group">
+                            <input type="search" id="token" class="form-control form-control-lg" placeholder="Enter the token">
+                        </div><br><br>
+                        <center>
+                          <input onclick="myfunction()" type="submit" value="GO">
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- ./wrapper -->
+<script>
+  function myfunction(){
+    var str=document.getElementById("token").value
+    if(str===""){
+      alert("Please enter your token")
+      location.reload()
+    }
+    else{
+      sessionStorage.setItem("token",str)
+    }
+  }
+</script>
+<!-- jQuery -->
+</body>
+</html>
